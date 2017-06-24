@@ -3,17 +3,23 @@ package com.jonwelzel.domain.models;
 import com.jonwelzel.domain.enums.Compass;
 
 public class RobotPosition {
-    private String xAxisPosition;
-    private String yAxisPosition;
+    private CartesianCoordinate coordinate;
     private Compass facingDirection;
 
-    public RobotPosition(String xAxisPosition, String yAxisPosition, Compass facingDirection) {
-        this.xAxisPosition = xAxisPosition;
-        this.yAxisPosition = yAxisPosition;
+    public RobotPosition(CartesianCoordinate coordinate, Compass facingDirection) {
+        this.coordinate = coordinate;
         this.facingDirection = facingDirection;
     }
 
+    public CartesianCoordinate getCoordinate() {
+        return coordinate;
+    }
+
+    public Compass getFacingDirection() {
+        return facingDirection;
+    }
+
     public String toString() {
-        return "(" + xAxisPosition + "," + yAxisPosition + "," + facingDirection.letter() + ")";
+        return "(" + coordinate.getXAxisPosition() + ", " + coordinate.getYAxisPosition() + ", " + facingDirection.letter() + ")";
     }
 }
