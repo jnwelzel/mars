@@ -7,9 +7,11 @@ import com.jonwelzel.domain.exceptions.NavigationCommandOutOfBoundsException;
 import com.jonwelzel.domain.models.CartesianCoordinate;
 import com.jonwelzel.domain.models.NavInstruction;
 import com.jonwelzel.domain.models.RobotPosition;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class NavigationEntity {
     public RobotPosition processNavigationInstruction(RobotPosition initialPosition, NavInstruction instruction) throws InvalidNavigationCommandException, NavigationCommandOutOfBoundsException {
         if(!instruction.isValid())
@@ -76,13 +78,13 @@ public class NavigationEntity {
             newCoordinates = new CartesianCoordinate(currentCoordinates.getXAxisPosition() - 1, currentCoordinates.getYAxisPosition());
         } else if (currentFacingDirection.equals(Compass.NORTH)) {
             // Y + 1
-            newCoordinates = new CartesianCoordinate(currentCoordinates.getYAxisPosition() + 1, currentCoordinates.getYAxisPosition());
+            newCoordinates = new CartesianCoordinate(currentCoordinates.getXAxisPosition(), currentCoordinates.getYAxisPosition() + 1);
         } else if (currentFacingDirection.equals(Compass.SOUTH)) {
             // Y - 1
-            newCoordinates = new CartesianCoordinate(currentCoordinates.getYAxisPosition() - 1, currentCoordinates.getYAxisPosition());
+            newCoordinates = new CartesianCoordinate(currentCoordinates.getXAxisPosition(), currentCoordinates.getYAxisPosition() - 1);
         }
 
-        if(newCoordinates.getXAxisPosition() > 4 || newCoordinates.getYAxisPosition() > 4)
+        if(newCoordinates.getXAxisPosition() > 4 || newCoordinates.getYAxisPosition() > 4 || newCoordinates.getXAxisPosition() < 0 || newCoordinates.getYAxisPosition() < 0)
             throw new NavigationCommandOutOfBoundsException(newCoordinates);
 
         return newCoordinates;

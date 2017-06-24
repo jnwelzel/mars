@@ -24,4 +24,14 @@ public enum RobotActions {
 
         return false;
     }
+
+    public static RobotActions fromString(String letter) {
+        for(RobotActions action : RobotActions.values()) {
+            if(action.letter.equalsIgnoreCase(letter)) {
+                return action;
+            }
+        }
+
+        return null;
+    }
 }

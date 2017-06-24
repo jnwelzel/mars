@@ -35,7 +35,7 @@ public class NavInstruction {
         String[] splitCommands = text.split("");
 
         for(int i = 0; i < splitCommands.length; i++) {
-            commands.add(i, RobotActions.valueOf(splitCommands[i]));
+            commands.add(i, RobotActions.fromString(splitCommands[i].toUpperCase()));
         }
 
         return commands;
