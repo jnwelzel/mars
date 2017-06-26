@@ -20,10 +20,7 @@ public class NavigationController {
     ResponseEntity<String> navigate(@PathVariable String commands) {
         try {
             return ResponseEntity.ok().body(navigationService.navigate(commands).toString());
-        } catch (InvalidNavigationCommandException e) {
-            e.printStackTrace();
-            return ResponseEntity.badRequest().body("400 Bad Request");
-        } catch (NavigationCommandOutOfBoundsException e) {
+        } catch (InvalidNavigationCommandException | NavigationCommandOutOfBoundsException e) {
             e.printStackTrace();
             return ResponseEntity.badRequest().body("400 Bad Request");
         }
